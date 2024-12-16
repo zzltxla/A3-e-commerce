@@ -1,17 +1,20 @@
 <?php
-
 require_once("./vendor/autoload.php");
+
+use App\Controller\ProductController;
 
 $request = $_SERVER['REQUEST_URI'];
 
-$loader = new \Twig\Loader\FilesystemLoader('./views');
+$loader = new \Twig\Loader\FilesystemLoader(realpath('../src/views'));
 $twig = new \Twig\Environment($loader);
+
 
 switch ($request) {
     case '':
     case '/':
-        echo $twig->render('home.twig');
-        break;
+        $controller = new ProductController();
+        $controller->index();  
+        break;  
 
     case '/crew':
         echo $twig->render('crew.twig');
