@@ -11,9 +11,11 @@ services:
       - mysql
     networks:
       - app_network
+      
   
   mysql:
     image: mysql:latest
+    platform: linux/arm64/v8
     container_name: mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -34,7 +36,8 @@ services:
       timeout: 5s
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    platform: linux/amd64
     container_name: phpmyadmin_container
     environment:
       PMA_HOST: ${MYSQL_HOST}
