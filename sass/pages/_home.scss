@@ -21,11 +21,37 @@
 }
 
 .home-page {
+  a {
+    color: white;
+    text-decoration: none;
+  }
   color: $white;
+  color: white;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   width: 90%;
+
+  .article-section {
+    width: 90%;
+    height: fit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    >div {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 1rem;
+        >article {
+          width: fit-content;
+          height: fit-content;
+          display: flex;
+          flex-direction: column;
+        }
+    }
+  }
 
   @media screen and (min-width: $tablet) {
     max-width: 445px;

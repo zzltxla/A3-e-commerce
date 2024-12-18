@@ -1,0 +1,16 @@
+{% include './includes/header.twig' %}
+{% include './includes/navigation.twig' %}
+
+<main>
+    <figure>
+        <img alt="{{product.name}}" src="{{product.image}}">
+    </figure>
+    <div>
+    <h1>{{product.name}}</h1>
+    <h3>{{product.price}}</h3>
+    <p>{{product.description}}</p>
+    <button>Add to cart</button>
+    </div>
+</main>
+
+{% include './includes/footer.twig' %}

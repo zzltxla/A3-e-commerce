@@ -1,20 +1,27 @@
 <?php
+
 require_once("./vendor/autoload.php");
 
 use App\Controller\ProductController;
 
 $request = $_SERVER['REQUEST_URI'];
 
-$loader = new \Twig\Loader\FilesystemLoader(realpath('../src/views'));
-$twig = new \Twig\Environment($loader);
-
-
 switch ($request) {
     case '':
+        $controller = new ProductController();
+        $controller->index();
+        break;
     case '/':
         $controller = new ProductController();
-        $controller->index();  
-        break;  
+        $controller->index();
+        break;
+
+    case '/product/detail':
+        if (isset($_GET['id'])){
+            $controller = new ProductController();
+            $controller->showProductDetail($id);
+            break;
+        }
 
     case '/crew':
         echo $twig->render('crew.twig');

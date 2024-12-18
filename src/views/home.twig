@@ -1,0 +1,27 @@
+{% include './includes/header.twig' %}
+
+<main class="home-page">
+  <div class="home-page__main-content">
+    <h1>E-commerce webpage</h1>
+    <section class="article-section">
+      <h2>Our products</h2>
+      <p>test</p>
+      {% dump(products) %}
+
+      <div>
+        {% for product in products %} 
+          <a href="/product/detail?id={{product.id}}">
+            <article>
+              <h3>{{product.name}}</h3>
+              <p>{{product.price}} $</p>
+              <button>
+                <p>Buy</p>
+              </button>
+            </article>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+</main>
+
+{% include './includes/footer.twig' %}
