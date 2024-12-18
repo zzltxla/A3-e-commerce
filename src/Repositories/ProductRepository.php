@@ -15,9 +15,29 @@ class ProductRepository
         $this->db = new Database;
     }
 
-    public function findAll()
+    public function findAll():array|Product
     {
         $fetchData = $this->db->read('product');
+        $products = [];
+
+        foreach ($fetchData as $row) {
+            $products[] = new Product(
+            name: $row['name'],
+            image: $row['image'],
+            price: (float) $row['price'],
+            description: $row['description'],
+            categoryId: (int) $row['categoryId'],
+            brandId: (int) $row['brandId'],
+            id: $row['id']
+            );
+        }
+        return $products;
+    }
+    public function findById(?int $id):Product|null {
+        if ($id === null) {
+            return null; //handle null values
+        }
+        $fetchData = $this->db->read('product ', "id =" . intval($id));
 
         $row = $fetchData[0];
 
@@ -30,26 +50,6 @@ class ProductRepository
             brandId: (int) $row['brandId'],
             id: $row['id']
         );
-        }
-
-    public function findById(?int $id) {
-        if ($id === null) {
-            return []; //handle null values
-        }
-
-        $fetchData = $this->db->read('product', "id = " . intval($id));
-        $product = [];
-        foreach ($fetchData as $row) {
-            $product[] = new Product(
-                name: $row['name'],
-                image: $row['image'],
-                price: (float) $row['price'],
-                description: $row['description'],
-                categoryId: (int) $row['categoryId'],
-                brandId: (int) $row['brandId'],
-                id: $row['id']
-            );
-        }
-        return $product;
     }
 }
+

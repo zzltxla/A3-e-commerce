@@ -6,19 +6,19 @@
     <section class="article-section">
       <h2>Our products</h2>
       <p>test</p>
-      {% dump(products) %}
-
       <div>
         {% for product in products %} 
-          <a href="/product/detail?id={{product.id}}">
+          
             <article>
               <h3>{{product.name}}</h3>
               <p>{{product.price}} $</p>
-              <button>
-                <p>Buy</p>
-              </button>
+                <form method="get" action="/product">
+                  <input type="hidden" name="id" value="{{ product.id }}"/>
+                  <button type="submit" value="buy">
+                    <p>Buy</p>
+                  </button>
+                </form>
             </article>
-          </a>
         {% endfor %}
       </div>
     </section>

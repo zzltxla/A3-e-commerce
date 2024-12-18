@@ -15,14 +15,14 @@ class ProductController extends Controller
         $this->productRepository = new ProductRepository();
     }
 
-    public function index(): void
+    public function index()
     {
         $products = $this->findAllProduct();
         echo $this->twig->render('home.twig', [
             'products' => $products
         ]);
     }
-    private function findAllProduct ():Product {
+    private function findAllProduct ():array|Product {
         return $this->productRepository->findAll();
     }
 
@@ -36,8 +36,11 @@ class ProductController extends Controller
             echo "Not found";
         }
     }
-    private function findProductById (int $id):array {
-        return $this->productRepository->findById($id) ?? null;
+    private function findProductById (int $id):Product {
+
+        $product = $this->productRepository->findById($id);
+
+        return $product ?? null;
     }
 }
 
